@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser, logoutCurrentUserAsync } from "./loginSlice";
+import { /*logoutUser,*/ logoutCurrentUserAsync } from "./loginSlice";
 
 const Logout = () => {
     const currentUser = useSelector(state => state.login.currentUser)
@@ -12,7 +12,8 @@ const Logout = () => {
 
     return (
         <div className={status === "idle" ? "green" : "red"}>
-            <button onClick={() => dispatch(logoutCurrentUserAsync())}>logout</button>
+
+        <button onClick={() => dispatch(logoutCurrentUserAsync())}>logout</button>
 
             <p> hello {currentUser ? currentUser.username : "guest"}</p>
 

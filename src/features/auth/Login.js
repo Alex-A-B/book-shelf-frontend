@@ -7,6 +7,8 @@ import { Link } from "react-router-dom"
 const Login = () => {
     // const currentUser = useSelector(state => state.login.currentUser)
     const status = useSelector(state => state.login.status)
+    const errors = useSelector(state => state.login.errors)
+    const currentUser = useSelector(state => state.login.currentUser)
     const { register, handleSubmit, reset } = useForm()
     const dispatch = useDispatch()
 
@@ -19,7 +21,8 @@ const Login = () => {
         dispatch(loginNewUserAsync(data))
         reset()
     }
-
+        console.log("user:", currentUser)
+        console.log("errors:", errors)
 
     return (
         <div className={status === "idle" ? "green" : "red"}>
@@ -40,6 +43,7 @@ const Login = () => {
                 required
                 />
                 <button type="submit">Login</button>
+                { errors?.length > 0 ? <div>{errors}</div>: null}
             </form>
             <br/>
             <p>Not a member yet? </p>

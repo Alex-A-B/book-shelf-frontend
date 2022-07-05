@@ -46,8 +46,10 @@ export const loginSlice = createSlice({
     name: "login",
     initialState,
     reducers: {
-        loginUser: (state, action) => {state.currentUser = action.payload
-                                       state.errors = null },
+        loginUser: (state, action) =>  { state.currentUser = action.payload
+                                        state.errors = null 
+                                        state.status = "idle"
+        },
         logoutUser: (state) => {state.currentUser = null},
         loginError: (state, action) => {state.errors = action.payload},
     },
@@ -57,15 +59,32 @@ export const loginSlice = createSlice({
             state.status = "Loading..."
         })
         .addCase(loginNewUserAsync.fulfilled, (state, action) => {
-            state.currentUser = action.payload
-            state.status = "idle"
+            if(action.payload?.error) { 
+                console.log("ERROR", action.payload.error)
+                state.currentUser = null
+                state.errors = action.payload.error
+                state.status = "error"
+            } else{
+                console.log("Success", action.payload.data.attributes)
+                state.currentUser = action.payload.data.attributes
+                state.errors = null
+                state.status = "idle"}        
         })
         .addCase(loginNewUserAsync.rejected, (state, action) => {
             state.status = "rejected"
         })
         .addCase(fetchCurrentUserAsync.fulfilled, (state, action) => {
-            state.currentUser = action.payload          
-                    })
+            if(action.payload?.error) { 
+                console.log("ERROR", action.payload.error)
+                state.currentUser = null
+                state.errors = action.payload.error
+                state.status = "idle"
+            } else{
+                console.log("Success", action.payload.data.attributes)
+                state.currentUser = action.payload.data.attributes
+                state.errors = null
+                state.status = "idle"}        
+        })
         .addCase(fetchCurrentUserAsync.rejected, () => {
            
         })

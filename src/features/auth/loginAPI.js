@@ -2,7 +2,7 @@
 export const fetchCurrentUser = () => {
     return fetch("/me")
         .then(response => response.json())
-        .then(user => user.data.attributes) 
+        .then(user => user) 
         .catch(error => alert(error.message))
 }
 
@@ -15,7 +15,7 @@ export const loginNewUser =( { username, password }) => {
         body: JSON.stringify({ username, password }),
         })
         .then((response) => response.json())
-        .then(user => user.data.attributes)
+        .then(user => user)
         .catch(error => alert(error.message))   
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import logo from './logo.svg';
-// import { Counter } from './features/counter/Counter';
 import Books from './features/books/Books'
 import Login from './features/auth/Login';
 import Logout from './features/auth/Logout';
@@ -19,9 +18,8 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCurrentUserAsync())
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [])
-
 
   if (currentUser) {
     return (

@@ -72,7 +72,13 @@ export const loginSlice = createSlice({
         .addCase(logoutCurrentUserAsync.fulfilled, (state) =>{
             state.currentUser = null
         })
-
+        .addCase(signupNewUserAsync.fulfilled, (state, action) =>{
+            state.currentUser = action.payload
+            state.errors = null
+        })
+        .addCase(signupNewUserAsync.rejected, (state, action) =>{
+            state.errors = action.payload
+        })
     }
 
     

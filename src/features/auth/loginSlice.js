@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { fetchCurrentUser, loginNewUser, logoutCurrentUser } from "./loginAPI"
+import { fetchCurrentUser, loginNewUser, logoutCurrentUser, signupNewUser } from "./loginAPI"
 
 const initialState = {
     currentUser: null,
-    status: "idle"
-    
+    status: "idle",
+    errors: null,
 }
 
 export const fetchCurrentUserAsync = createAsyncThunk(
@@ -33,12 +33,23 @@ export const logoutCurrentUserAsync = createAsyncThunk(
     }
 )
 
+export const signupNewUserAsync = createAsyncThunk(
+    "auth/signupNewUser",
+    async({username, email, password, password_confirmation}) => {
+        const response = await signupNewUser({username, email, password, password_confirmation})
+        console.log(response)
+        return response
+    }
+)
+
 export const loginSlice = createSlice({
     name: "login",
     initialState,
     reducers: {
-        loginUser: (state, action) => {state.currentUser = action.payload },
-        logoutUser: (state) => {state.currentUser = null}
+        loginUser: (state, action) => {state.currentUser = action.payload
+                                       state.errors = null },
+        logoutUser: (state) => {state.currentUser = null},
+        loginError: (state, action) => {state.errors = action.payload},
     },
     extraReducers: (builder) => {
         builder
@@ -68,4 +79,4 @@ export const loginSlice = createSlice({
 })
 
 export default loginSlice.reducer
-export const { loginUser, logoutUser } = loginSlice.actions
+export const { loginUser, logoutUser, loginError } = loginSlice.actions

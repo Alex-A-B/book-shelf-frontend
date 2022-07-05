@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 const Login = () => {
     // const currentUser = useSelector(state => state.login.currentUser)
     const status = useSelector(state => state.login.status)
-    const {register, handleSubmit, reset } = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const dispatch = useDispatch()
 
     // useEffect(() => {
@@ -23,7 +23,7 @@ const Login = () => {
 
     return (
         <div className={status === "idle" ? "green" : "red"}>
-            <h4>Welcome, please log in to continue:</h4>
+            <h4>Welcome, already a member, please log in to continue:</h4>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h5>Login</h5>

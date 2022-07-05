@@ -19,39 +19,39 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCurrentUserAsync())
-}, [])
+     // eslint-disable-next-line
+  }, [])
 
 
-if (currentUser) {
-  return (
-    <div className="App">
-      <header className="App-header">
-      </header>
-      <Routes>
-        <Route exact path="/dashboard" element={<Dashboard />} />
-        <Route exact path="/logout" element={<Logout />} />
-        <Route exact path="/searchBooks" element={<Books />} />
-        {/* my books 
-        my comments 
-        my ratings */}
-        <Route exact path="/*" element={<Navigate to="Dashboard" />} /> 
-        {/* maybe switch to a user dashboard landing page */}
-      </Routes>
-      <img src={logo} className="App-logo" alt="logo" />
-        {/* <Login />
-        <Books />  */}
-        <Logout />
-    </div>
-  )} else {
+  if (currentUser) {
     return (
-      <div className='App'>
+      <div className="App">
+        <header className="App-header">
+        <Logout />
+        </header>
         <Routes>
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/*" element={<Navigate to="/login" />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/searchBooks" element={<Books />} />
+          {/* my books 
+          my comments 
+          my ratings */}
+          <Route exact path="/*" element={<Navigate to="Dashboard" />} /> 
         </Routes>
+        <img src={logo} className="App-logo" alt="logo" />
+          {/* <Login />
+          <Books />  */}    
       </div>
-  )}
+    )} else {
+      return (
+        <div className='App'>
+          <Routes>
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/*" element={<Navigate to="/login" />} />
+          </Routes>
+        </div>
+    )}
 }
 
 export default App;

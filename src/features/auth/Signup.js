@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form";
-import { loginUser, loginError /*signupNewUserAsync*/ } from "./loginSlice";
+import { /*loginUser, loginError,*/ signupNewUserAsync } from "./loginSlice";
 
 
 const Signup = () =>{
@@ -13,32 +13,34 @@ const Signup = () =>{
 
     const onSubmit = (data) => {
         console.log(data)
-         fetch(`/signup`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-          .then((response) => {
-            if(response.ok){
-                response.json()
-                .then((newUser) =>{ 
-                    dispatch(loginUser(newUser.data.attributes))
-                    console.log(newUser)
-                })
-            }else{
-                response.json().then((errors)=>{
-                    console.log(response)
-                    console.log(errors)
-                    dispatch(loginError(errors.exception))
-                    })
-                }
-            })
+        // const {username, email, password, password_confirmation} = data
+        dispatch(signupNewUserAsync(data))
+        //  fetch(`/signup`, {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(data),
+        //   })
+        //   .then((response) => {
+        //     if(response.ok){
+        //         response.json()
+        //         .then((newUser) =>{ 
+        //             dispatch(loginUser(newUser.data.attributes))
+        //             console.log(newUser)
+        //         })
+        //     }else{
+        //         response.json().then((errors)=>{
+        //             console.log(response)
+        //             console.log(errors)
+        //             dispatch(loginError(errors.exception))
+        //             })
+        //         }
+        //     })
         }
 
-        console.log(errors)
-        console.log(currentUser)
+        console.log("errors:", errors)
+        console.log("user:", currentUser)
     
     return (
         <div>
@@ -69,7 +71,7 @@ const Signup = () =>{
                 required
                 />
                 <button type="submit">Create new user</button>
-                { errors?.length > 0 ? <div>{errors}</div>: null}
+                { errors?.length > 0 ? <div>{errors.map((err) => (<div key={err.id}> *{err}*</div>))}</div>: null}
             </form>
            
         </div>

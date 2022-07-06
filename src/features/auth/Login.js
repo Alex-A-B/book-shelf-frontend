@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
 const Login = () => {
-    // const currentUser = useSelector(state => state.login.currentUser)
     const status = useSelector(state => state.login.status)
     const errors = useSelector(state => state.login.errors)
     const currentUser = useSelector(state => state.login.currentUser)

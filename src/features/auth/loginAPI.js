@@ -26,26 +26,15 @@ export const logoutCurrentUser = () => {
 }
 
 export const signupNewUser = ( { username, email, password, password_confirmation } ) => {
-    fetch(`/signup`, {
+    return fetch("/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(username, email, password, password_confirmation),
-      })
-      .then((response) => {
-        if(response.ok){
-            response.json()
-            .then((newUser) =>{ 
-                // console.log(newUser)
-                return  (newUser.data.attributes)
-            })
-        }else{
-            response.json().then((errors)=>{
-                // console.log(response)
-                // console.log(errors)
-                return (errors.exception)
-                })
-            }
-        })
-}
+        body: JSON.stringify({username, email, password, password_confirmation}),
+         })
+        .then((response) => response.json())
+        .then(newUser => newUser)
+        .catch(error => alert(error.message))  
+         }
+      

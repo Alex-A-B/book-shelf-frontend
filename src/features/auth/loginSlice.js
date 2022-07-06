@@ -36,7 +36,7 @@ export const logoutCurrentUserAsync = createAsyncThunk(
 export const signupNewUserAsync = createAsyncThunk(
     "auth/signupNewUser",
     async({username, email, password, password_confirmation}) => {
-        const response = await signupNewUser({username, email, password, password_confirmation})
+        const response = await signupNewUser( { username, email, password, password_confirmation } )
         console.log(response)
         return response
     }
@@ -92,8 +92,16 @@ export const loginSlice = createSlice({
             state.currentUser = null
         })
         .addCase(signupNewUserAsync.fulfilled, (state, action) =>{
-            state.currentUser = action.payload
-            state.errors = null
+            if(action.payload?.errors) { 
+                console.log("ERROR", action.payload.errors)
+                state.currentUser = null
+                state.errors = action.payload.errors
+                state.status = "error"
+            } else{
+                console.log("Success", action.payload.data.attributes)
+                state.currentUser = action.payload.data.attributes
+                state.errors = null
+                state.status = "idle"}
         })
         .addCase(signupNewUserAsync.rejected, (state, action) =>{
             state.errors = action.payload

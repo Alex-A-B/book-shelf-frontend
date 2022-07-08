@@ -50,7 +50,9 @@ export const loginSlice = createSlice({
                                         state.errors = null 
                                         state.status = "idle"
         },
-        logoutUser: (state) => {state.currentUser = null},
+        logoutUser: (state) => {state.currentUser = null
+                                state.errors = null
+                                state.status = "idle"    },
         loginError: (state, action) => {state.errors = action.payload},
     },
     extraReducers: (builder) => {
@@ -71,13 +73,15 @@ export const loginSlice = createSlice({
                 state.status = "idle"}        
         })
         .addCase(loginNewUserAsync.rejected, (state, action) => {
-            state.status = "rejected"
+                state.currentUser = null
+                state.errors = action.payload.errors
+                state.status = "error"
         })
         .addCase(fetchCurrentUserAsync.fulfilled, (state, action) => {
             if(action.payload?.error) { 
                 console.log("ERROR", action.payload.error)
                 state.currentUser = null
-                state.errors = action.payload.error
+                // state.errors = action.payload.error
                 state.status = "idle"
             } else{
                 console.log("Success", action.payload.data.attributes)
@@ -85,11 +89,15 @@ export const loginSlice = createSlice({
                 state.errors = null
                 state.status = "idle"}        
         })
-        .addCase(fetchCurrentUserAsync.rejected, () => {
-           
+        .addCase(fetchCurrentUserAsync.rejected, (state, action) => {
+                state.currentUser = null
+                state.errors = action.payload.errors
+                state.status = "error"
         })
         .addCase(logoutCurrentUserAsync.fulfilled, (state) =>{
-            state.currentUser = null
+                state.currentUser = null
+                state.errors = null
+                state.status = "idle"
         })
         .addCase(signupNewUserAsync.fulfilled, (state, action) =>{
             if(action.payload?.errors) { 
@@ -104,7 +112,9 @@ export const loginSlice = createSlice({
                 state.status = "idle"}
         })
         .addCase(signupNewUserAsync.rejected, (state, action) =>{
-            state.errors = action.payload
+                state.currentUser = null
+                state.errors = action.payload.errors
+                state.status = "error"
         })
     }
 

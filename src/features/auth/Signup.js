@@ -71,7 +71,7 @@ const Signup = () =>{
                 required
                 />
                 <button type="submit">Create new user</button>
-                { errors?.length > 0 ? <div>{errors.map((err) => (<div key={err.id}> *{err}*</div>))}</div>: null}
+                { errors?.length > 0 ? <div>{errors.map((err, index) => (<div key={index}>*{err}*</div>))}</div>: null}
             </form>
            
         </div>

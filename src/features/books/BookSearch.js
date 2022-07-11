@@ -7,7 +7,7 @@ import BookCard from "./BookCard"
 // map books - limit numbers to cache?
 
 
-const Books = () => {
+const BookSearch = () => {
     const [searchResult, setSearchResult] = useState([])
 
     const {register, handleSubmit, reset } = useForm()
@@ -31,6 +31,7 @@ const Books = () => {
 
     return (
         <div>
+            <h3>Search for a Book...</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <input {...register("bookQuery")}
                 type="text"
@@ -39,10 +40,12 @@ const Books = () => {
                 />
                 <button type="submit">Search</button>
             </form>
+            <div className="bookContainer">
             {searchResult.length > 0 ? searchResult.map((book) => <BookCard key={book.id} book={book.volumeInfo} />) : null}
+            </div>
         </div>
 
     )
 }
 
-export default Books
+export default BookSearch

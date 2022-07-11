@@ -13,9 +13,12 @@ export const bookshelfSlice = createSlice({
     initialState,
 
     reducers: {
+        loadBookshelf: (state, action) => {
+            state.bookshelves = action.payload    
+        },
         addBookToShelf: (state, action) => {
             state.bookshelves = [...state.bookshelves, action.payload]
-        }
+        },
     },
 
     // extraReducers: (builder) => {
@@ -25,3 +28,4 @@ export const bookshelfSlice = createSlice({
 })
 
 export default bookshelfSlice.reducer
+export const { loadBookshelf, addBookToShelf } = bookshelfSlice.actions

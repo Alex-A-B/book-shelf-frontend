@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector /*, useDispatch*/ } from "react-redux"; 
-import Books from "../books/Books"
+import BookSearch from "../books/BookSearch"
+import Bookshelf from "../bookshelf/Bookshelf";
 
 
 
@@ -11,9 +12,11 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <h3>Welcome {currentUser.username}</h3>
+            <h1>Welcome {currentUser.username}</h1>
 
-            <Books />
+            <BookSearch />
+            
+            <Bookshelf />
 
         </div>
     )

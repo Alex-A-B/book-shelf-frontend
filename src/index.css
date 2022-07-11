@@ -1,13 +1,78 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --bg: #282c34;
+  --header: #fff;
+  --link: #61dafb;
+  --text: hsla(0, 0%, 100%, 0.88);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: "Merriweather", "Georgia", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1,
+h3 {
+  font-size: 2em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.App {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2.5rem 1rem;
+  max-width: 700px;
+}
+
+header h1 {
+  font-size: 3em;
+}
+
+
+form {
+  padding-top: 2rem;
+}
+
+form > * {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.bookContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 1rem, 0.5rem;
+  grid-auto-flow: row;
+
+  border: 1px solid white;
+  border-radius: .5rem;
+  padding: 1rem;
+}
+
+.book {
+  /* can get granular to have pic /title author as one box then the rest as another etc */
+  display: flex;
+  flex-flow: column;
+  align-content: center;
+  justify-items: space-between;
+
+  margin-top: 1rem;
+  margin-left: 1rem;
+
+  border: 1px solid white;
+  border-radius: .5rem;
+  padding: 1rem;
 }

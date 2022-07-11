@@ -15,7 +15,7 @@ const Logout = () => {
 
         <button onClick={() => dispatch(logoutCurrentUserAsync())}>logout</button>
 
-            <p> hello {currentUser ? currentUser.username : "guest"}</p>
+            {/* <p> hello {currentUser ? currentUser.username : "guest"}</p> */}
 
         </div>
 

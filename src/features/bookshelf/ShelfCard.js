@@ -3,7 +3,13 @@ import React from "react";
 const ShelfCard = ( { shelf, book }) => {
     const {read, owned, ownership_source} = shelf
     
-    const {title, author, genre, synopsis, image_url } = book
+    const {title, author, /*genre, synopsis,*/ image_url } = book
+
+    function handleRemoveBook() {
+        fetch(`bookshelves/${shelf.id}`, {
+            method: "DELETE",
+        })
+    }
 
     console.log("shelf:", shelf)
     console.log("book:", book)
@@ -24,6 +30,7 @@ const ShelfCard = ( { shelf, book }) => {
                         null
                         ) }
             </div>
+            <button onClick={handleRemoveBook}>Remove from my Library</button>
         </div>
     )
 

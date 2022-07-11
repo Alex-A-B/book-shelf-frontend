@@ -76,3 +76,10 @@ form > * {
   border-radius: .5rem;
   padding: 1rem;
 }
+
+.bookInfo {
+  display: flex;
+  flex-flow: row;
+  align-content: center;
+  justify-items: space-evenly;
+}

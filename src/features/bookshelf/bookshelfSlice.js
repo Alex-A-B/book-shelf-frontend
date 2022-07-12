@@ -1,11 +1,20 @@
-import { /*createAsyncThunk, */ createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { updateBookShelf } from './bookshelfAPI';
 
 
 const initialState ={
     bookshelves: [],
-    // status: idle,
+    
 };
 
+export const updateBookshelfAsync = createAsyncThunk(
+    "bookshelf/updateBookshelf",
+    async ( { id, data }) =>{
+        const response = updateBookShelf(id, data)
+            console.log(response)
+            return response
+    }
+)
 
 
 export const bookshelfSlice = createSlice({
@@ -21,10 +30,14 @@ export const bookshelfSlice = createSlice({
         },
     },
 
-    // extraReducers: (builder) => {
-    //     builder
-    //         // .addCase go here for async
-    // },
+    extraReducers: (builder) => {
+        builder
+            .addCase(updateBookshelfAsync.fulfilled, (state, action) => {
+                    console.log(action.payload)
+                    let filteredShelf = state.bookshelves.find(shelf => shelf.id === action.payload.id)
+                    filteredShelf = action.payload
+            }) 
+    },
 })
 
 export default bookshelfSlice.reducer

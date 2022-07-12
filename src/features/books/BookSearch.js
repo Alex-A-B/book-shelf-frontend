@@ -20,14 +20,13 @@ const BookSearch = () => {
             if(r.ok){
                 r.json()
                 .then(bookSearch => setSearchResult(bookSearch.items))
-                .then(console.log(searchResult))
                 }
         })
         //process books search results
         reset()
     }
 
-    // console.log(searchResult)
+    
 
     return (
         <div>

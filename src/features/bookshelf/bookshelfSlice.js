@@ -9,9 +9,8 @@ const initialState ={
 
 export const updateBookshelfAsync = createAsyncThunk(
     "bookshelf/updateBookshelf",
-    async ( { id, data }) =>{
-        const response = updateBookShelf(id, data)
-            console.log(response)
+    async ( data ) =>{
+        const response = updateBookShelf(data)
             return response
     }
 )
@@ -33,9 +32,13 @@ export const bookshelfSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(updateBookshelfAsync.fulfilled, (state, action) => {
-                    console.log(action.payload)
-                    let filteredShelf = state.bookshelves.find(shelf => shelf.id === action.payload.id)
-                    filteredShelf = action.payload
+                    const { id, read, owned } = action.payload.data.attributes
+                    const existingShelf = state.bookshelves.find(shelf => shelf.id === id)
+                    if (existingShelf) {
+                        existingShelf.read = read
+                        existingShelf.owned = owned
+                    }
+                 
             }) 
     },
 })

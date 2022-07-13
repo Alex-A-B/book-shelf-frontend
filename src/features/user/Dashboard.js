@@ -8,8 +8,7 @@ import Bookshelf from "../bookshelf/Bookshelf";
 const Dashboard = () => {
     const currentUser = useSelector(state => state.login.currentUser)
 
-    console.log(currentUser.bookshelves.data.map((att) => (att.attributes))) //bookshelves owned by user from state!
-
+    
     return (
         <div className="dashboard">
             <h1>Welcome {currentUser.username}</h1>

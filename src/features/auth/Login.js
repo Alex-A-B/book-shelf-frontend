@@ -7,22 +7,15 @@ import { Link } from "react-router-dom"
 const Login = () => {
     const status = useSelector(state => state.login.status)
     const errors = useSelector(state => state.login.errors)
-    const currentUser = useSelector(state => state.login.currentUser)
+    // const currentUser = useSelector(state => state.login.currentUser)
     const { register, handleSubmit, reset } = useForm()
     const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     dispatch(fetchCurrentUserAsync())
-    // }, [])
-    // this should move to App/home/ and run from there
 
     const onSubmit = (data) => {
         dispatch(loginNewUserAsync(data))
         reset()
     }
-        console.log("user:", currentUser)
-        console.log("errors:", errors)
-
+   
     return (
         <div className={status === "idle" ? "green" : "red"}>
             <h4>Welcome, already a member, please log in to continue:</h4>
@@ -49,7 +42,6 @@ const Login = () => {
             <Link to="/signup">
                 <button >click here to sign up</button>
             </Link>
-            {/* <p> hello {currentUser ? currentUser.username : "guest"}</p> */}
 
         </div>
 

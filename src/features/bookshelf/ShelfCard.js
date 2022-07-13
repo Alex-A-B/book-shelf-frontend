@@ -3,24 +3,11 @@ import { useDispatch } from "react-redux";
 import { updateBookshelfAsync } from "./bookshelfSlice";
 
 const ShelfCard = ( { shelf, book }) => {
-    const {read, owned, ownership_source} = shelf
+    const {id, read, owned } = shelf
     
     const {title, author, /*genre, synopsis,*/ image_url } = book
 
     const dispatch = useDispatch()
-
-    // const updateId = {
-    //     id: shelf.id,
-    // }
-
-    // const readup = {
-    //     read: !read,
-    // }
-    
-    const ownedUpdate = {
-        owned: !owned,
-    }
-    console.log(ownedUpdate)
 
     function handleRemoveBook() {
         fetch(`bookshelves/${shelf.id}`, {
@@ -28,25 +15,16 @@ const ShelfCard = ( { shelf, book }) => {
         })
     }
 
-    const handleReadUpdate = (/*updateId, readup*/) => {
-        const id = { id: shelf.id, }
-        const data = { read: !read, }
-        dispatch(updateBookshelfAsync(id, data))
+    const handleReadUpdate = () => {
+        const data = { id: id, read: !read }
+        dispatch(updateBookshelfAsync(data))
     }
 
-    // function handleUpdateReadBook() {
-    //     fetch(`bookshelves/${shelf.id}`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({read: !read }),
-    //     }).then(r => r.json())
-    //     .then(r => console.log(r))
-    // }
+    const handleOwnedUpdate = () => {
+        const data = {id: id, owned: !owned }
+        dispatch(updateBookshelfAsync(data))
+    }
 
-    console.log("shelf:", shelf)
-    console.log("book:", book)
     return (
         <div className="book">
             {/*some link to book to DRY out code*/}
@@ -56,16 +34,9 @@ const ShelfCard = ( { shelf, book }) => {
             <div className="bookInfo">
                 {read ? (<h4>Read it!</h4>) : (<h4>I still need to read this.</h4>) }
                 {owned ? (<h4>Own a copy!</h4>) : (<h4>Don't own a copy.</h4>) }
-                {owned ? (<div>
-                            <h4>I got it from:</h4>
-                            <p>{ownership_source}</p>
-                        </div>
-                        ) : (
-                        null
-                        ) }
             </div>
             { read ? (<button onClick={handleReadUpdate}>I haven't read this</button>) : (<button onClick={handleReadUpdate}>I've read this</button>)}
-            { owned ? (<button>I don't own this yet!</button>) : (<button>I own this one.</button>) }
+            { owned ? (<button onClick={handleOwnedUpdate}>I don't own this yet!</button>) : (<button onClick={handleOwnedUpdate}>I own this one.</button>) }
             <button onClick={handleRemoveBook}>Remove from my Library</button>
         </div>
     )

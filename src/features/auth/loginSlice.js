@@ -11,7 +11,6 @@ export const fetchCurrentUserAsync = createAsyncThunk(
     "auth/fetchCurrentUser",
     async () =>{
         const response = await fetchCurrentUser()
-            console.log(response)
             return response
     }
 )
@@ -20,7 +19,6 @@ export const loginNewUserAsync = createAsyncThunk(
     "auth/loginNewUser",
     async({ username, password }) => {
         const response = await loginNewUser( { username, password })
-            console.log(response)
             return response
     }
 )
@@ -37,7 +35,6 @@ export const signupNewUserAsync = createAsyncThunk(
     "auth/signupNewUser",
     async({username, email, password, password_confirmation}) => {
         const response = await signupNewUser( { username, email, password, password_confirmation } )
-        console.log(response)
         return response
     }
 )
@@ -62,12 +59,10 @@ export const loginSlice = createSlice({
         })
         .addCase(loginNewUserAsync.fulfilled, (state, action) => {
             if(action.payload?.error) { 
-                console.log("ERROR", action.payload.error)
                 state.currentUser = null
                 state.errors = action.payload.error
                 state.status = "error"
             } else{
-                console.log("Success", action.payload.data.attributes)
                 state.currentUser = action.payload.data.attributes
                 state.errors = null
                 state.status = "idle"}        
@@ -79,12 +74,10 @@ export const loginSlice = createSlice({
         })
         .addCase(fetchCurrentUserAsync.fulfilled, (state, action) => {
             if(action.payload?.error) { 
-                console.log("ERROR", action.payload.error)
                 state.currentUser = null
                 // state.errors = action.payload.error
                 state.status = "idle"
             } else{
-                console.log("Success", action.payload.data.attributes)
                 state.currentUser = action.payload.data.attributes
                 state.errors = null
                 state.status = "idle"}        
@@ -101,12 +94,10 @@ export const loginSlice = createSlice({
         })
         .addCase(signupNewUserAsync.fulfilled, (state, action) =>{
             if(action.payload?.errors) { 
-                console.log("ERROR", action.payload.errors)
                 state.currentUser = null
                 state.errors = action.payload.errors
                 state.status = "error"
             } else{
-                console.log("Success", action.payload.data.attributes)
                 state.currentUser = action.payload.data.attributes
                 state.errors = null
                 state.status = "idle"}

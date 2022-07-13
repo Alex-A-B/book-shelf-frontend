@@ -1,8 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { fetchCurrentUserAsync } from '../auth/loginSlice';
 
-const BookCard = ( { book } ) => {
-    // console.log(book)
+const BookCard = ( { book, onAddBook } ) => {
     const {title, description, imageLinks, authors, categories } = book
+    const dispatch = useDispatch()
+    
 
     function handleAddBook() {
         const bookData = {
@@ -20,7 +23,13 @@ const BookCard = ( { book } ) => {
         body: JSON.stringify( bookData ),
         })
         .then((response) => response.json())
-        .then(book => console.log("new add book:", book.data.attributes))
+        .then(response => { 
+            console.log("1", response.data.attributes)
+            onAddBook()
+            dispatch(fetchCurrentUserAsync())
+        })
+
+        
         .catch(error => alert(error.message))
     }
 

@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector /*, useDispatch*/ } from "react-redux"; 
-import BookSearch from "../books/BookSearch"
-import Bookshelf from "../bookshelf/Bookshelf";
+// import { Link } from "react-router-dom";
+// import BookSearch from "../books/BookSearch"
+// import Bookshelf from "../bookshelf/Bookshelf";
 
 
 
@@ -12,10 +13,13 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <h1>Welcome {currentUser.username}</h1>
-
-            <BookSearch />
+            {/* <ul>
+                <li><Link to="/searchBooks">Search for books</Link></li>
+                <li><Link to="/myBooks">Go to my books</Link></li>
+            </ul> */}
+            {/* <BookSearch />
             
-            <Bookshelf />
+            <Bookshelf /> */}
 
         </div>
     )

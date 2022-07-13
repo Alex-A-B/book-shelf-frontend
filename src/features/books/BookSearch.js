@@ -26,6 +26,9 @@ const BookSearch = () => {
         reset()
     }
 
+    const handleAddedBook = () => {
+        setSearchResult([])
+    }
     
 
     return (
@@ -40,7 +43,7 @@ const BookSearch = () => {
                 <button type="submit">Search</button>
             </form>
             <div className="bookContainer">
-            {searchResult.length > 0 ? searchResult.map((book) => <BookCard key={book.id} book={book.volumeInfo} />) : null}
+            {searchResult.length > 0 ? searchResult.map((book) => <BookCard key={book.id} book={book.volumeInfo} onAddBook={handleAddedBook} />) : null}
             </div>
         </div>
 

@@ -14,8 +14,7 @@ const Bookshelf = () => {
         // eslint-disable-next-line
     }, [])
 
-    console.log(bookshelves)
-
+    
     return (    
         <div className="bookShelf"> 
             <h3>My books</h3>

@@ -23,9 +23,6 @@ export const deleteBookshelfAsync = createAsyncThunk(
     }
 )
 
-
-
-
 export const bookshelfSlice = createSlice({
     name: 'bookshelfSlice',
     initialState,
@@ -48,10 +45,8 @@ export const bookshelfSlice = createSlice({
                         existingShelf.read = read
                         existingShelf.owned = owned
                     }
-                 
             }) 
             .addCase(deleteBookshelfAsync.fulfilled, (state, action) => {
-                    console.log(action.payload)
                     state.bookshelves = state.bookshelves.filter(shelf => shelf.id !== action.payload)
             })
     },

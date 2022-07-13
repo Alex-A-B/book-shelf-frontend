@@ -1,5 +1,4 @@
-export const updateBookShelf = ( data) => {
-    console.log("ubs", data)
+export const updateBookshelf = ( data) => {
     return fetch(`bookshelves/${data.id}`, {
         method: "PATCH",
         headers: {
@@ -9,4 +8,10 @@ export const updateBookShelf = ( data) => {
     }).then(r => r.json())
     .then(r => (r))
     .catch(error => alert(error.message))
+}
+
+export const deleteBookshelf = ( id ) => {
+    return fetch(`bookshelves/${id}`, {
+        method: "DELETE",
+    })
 }

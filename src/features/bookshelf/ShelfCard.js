@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { updateBookshelfAsync } from "./bookshelfSlice";
+import { updateBookshelfAsync, deleteBookshelfAsync } from "./bookshelfSlice";
 
 const ShelfCard = ( { shelf, book }) => {
     const {id, read, owned } = shelf
@@ -10,15 +10,13 @@ const ShelfCard = ( { shelf, book }) => {
     const dispatch = useDispatch()
 
     function handleRemoveBook() {
-        fetch(`bookshelves/${shelf.id}`, {
-            method: "DELETE",
-        })
+        dispatch(deleteBookshelfAsync(id))
     }
 
     const handleReadUpdate = () => {
         const data = { id: id, read: !read }
         dispatch(updateBookshelfAsync(data))
-    }
+    }  
 
     const handleOwnedUpdate = () => {
         const data = {id: id, owned: !owned }

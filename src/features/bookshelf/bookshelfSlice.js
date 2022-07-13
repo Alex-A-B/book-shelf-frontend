@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { updateBookShelf } from './bookshelfAPI';
+import { updateBookshelf, deleteBookshelf } from './bookshelfAPI';
 
 
 const initialState ={
@@ -10,10 +10,20 @@ const initialState ={
 export const updateBookshelfAsync = createAsyncThunk(
     "bookshelf/updateBookshelf",
     async ( data ) =>{
-        const response = updateBookShelf(data)
+        const response = updateBookshelf(data)
             return response
     }
 )
+
+export const deleteBookshelfAsync = createAsyncThunk(
+    "bookshelf/deleteBookshelf",
+    async ( id ) => {
+        deleteBookshelf( id )
+        return id
+    }
+)
+
+
 
 
 export const bookshelfSlice = createSlice({
@@ -40,6 +50,10 @@ export const bookshelfSlice = createSlice({
                     }
                  
             }) 
+            .addCase(deleteBookshelfAsync.fulfilled, (state, action) => {
+                    console.log(action.payload)
+                    state.bookshelves = state.bookshelves.filter(shelf => shelf.id !== action.payload)
+            })
     },
 })
 

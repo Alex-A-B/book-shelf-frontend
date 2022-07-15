@@ -1,6 +1,7 @@
 
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchAllRatingsAsync, fetchMyRatingsAsync } from "../ratings/ratingsSlice";
 import { loadBookshelf } from "./bookshelfSlice";
 import ShelfCard from "./ShelfCard";
 
@@ -11,6 +12,8 @@ const Bookshelf = () => {
 
     useEffect(() =>{
         dispatch(loadBookshelf(currentUser.bookshelves.data.map((att) => (att.attributes))))
+        dispatch(fetchAllRatingsAsync())
+        dispatch(fetchMyRatingsAsync())
         // eslint-disable-next-line
     }, [])
 

@@ -34,7 +34,6 @@ export const updateRatingAsync = createAsyncThunk(
 export const createNewRatingAsync = createAsyncThunk(
     "ratings/createNewRating",
     async( data ) => {
-        console.log("atSlice", data)
         const response = await createNewRating(data)
         return response
     }

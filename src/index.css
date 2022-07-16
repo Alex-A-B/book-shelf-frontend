@@ -86,5 +86,10 @@ form > * {
 
 .ratings {
   display: flex;
+  flex-flow: column;
   align-content: center;
+}
+
+li {
+  list-style-type: none;
 }

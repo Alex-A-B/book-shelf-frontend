@@ -67,7 +67,7 @@ const ShelfCard = ( { shelf, book }) => {
             {thisRating ? (
                 <div>
                     <div className="ratings">
-                        <p>I have rated this book {thisRating.rating}/5!</p><br/>
+                        <p>I have rated this book <strong>{thisRating.rating}/5</strong>!</p>
                         <p>Update my rating:</p>
                         <form onSubmit={handleSubmit(onUpdateSubmit)}>
                             <select {...register("rating")}>

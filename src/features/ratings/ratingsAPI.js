@@ -5,7 +5,6 @@ export const deleteRating = ( id ) => {
 }
 
 export const createNewRating = (data) => {
-    console.log("atAPI", data)
     return fetch("/ratings", {
         method: "POST",
         headers: {

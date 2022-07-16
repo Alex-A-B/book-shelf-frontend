@@ -65,7 +65,6 @@ export const ratingsSlice = createSlice({
             state.ratings = action.payload.data.map( att=> att.attributes)
         })
         .addCase(fetchMyRatingsAsync.fulfilled, (state, action ) => {
-            console.log("fetchmyfulf", action.payload.data.map( att=> att.attributes))
             state.myRatings = action.payload.data.map( att=> att.attributes)
         })
         .addCase(createNewRatingAsync.fulfilled, (state, action) => {
@@ -75,13 +74,14 @@ export const ratingsSlice = createSlice({
         })
         .addCase(updateRatingAsync.fulfilled, (state, action) => {
             const { id, rating } = action.payload.data.attributes
-            const existingRating = state.bookshelves.find(rating => rating.id === id)
+            const existingRating = state.myRatings.find(rating => rating.id === id)
             if (existingRating) {
                 existingRating.rating = rating
             }
         }) 
         .addCase(deleteRatingAsync.fulfilled, (state, action) => {
             state.ratings = state.ratings.filter(rating => rating.id !== action.payload)
+            state.myRatings = state.myRatings.filter(rating => rating.id !== action.payload)
         })
     }
 })

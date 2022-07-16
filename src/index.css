@@ -43,7 +43,7 @@ header h1 {
 
 
 form {
-  padding-top: 2rem;
+  padding-top: 0.5rem;
 }
 
 form > * {
@@ -82,4 +82,9 @@ form > * {
   flex-flow: row;
   align-content: center;
   justify-items: space-evenly;
+}
+
+.ratings {
+  display: flex;
+  align-content: center;
 }

@@ -25,11 +25,13 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-        <Logout />
-        <ul>
-            <li><Link to="/searchBooks">Search for books</Link></li>
-            <li><Link to="/myBooks">Go to my books</Link></li>
+          <h3>Book it!</h3>
+        <ul className="Header-links">
+          <li><Link to="/dashboard">Home</Link></li>
+          <li><Link to="/searchBooks">Search for books</Link></li>
+          <li><Link to="/myBooks">Go to my books</Link></li>
         </ul>
+        <Logout />
         </header>
         <Routes>
           <Route exact path="/dashboard" element={<Dashboard />} />
@@ -44,6 +46,13 @@ function App() {
     )} else {
       return (
         <div className='App'>
+          <header className="App-header">
+            <h3>Book it!</h3>
+          <ul className="Header-links">
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/signup">Sign Up</Link></li>
+          </ul>
+          </header>
           <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />

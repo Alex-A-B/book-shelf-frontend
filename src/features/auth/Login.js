@@ -1,13 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { /*fetchCurrentUserAsync,*/ loginNewUserAsync /*setCurrentUser*/ } from "./loginSlice";
+import { loginNewUserAsync } from "./loginSlice";
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
 const Login = () => {
-    const status = useSelector(state => state.login.status)
     const errors = useSelector(state => state.login.errors)
-    // const currentUser = useSelector(state => state.login.currentUser)
     const { register, handleSubmit, reset } = useForm()
     const dispatch = useDispatch()
 
@@ -17,7 +15,7 @@ const Login = () => {
     }
    
     return (
-        <div className={status === "idle" ? "green" : "red"}>
+        <div className="">
             <h4>Welcome, already a member, please log in to continue:</h4>
 
             <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,8 +1,8 @@
 :root {
-  --bg: #282c34;
+  --bg: #302834;
   --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+  --link: #61fbbb;
+  --text: hsla(0, 0%, 100%, 0.829);
 }
 
 body {
@@ -34,7 +34,7 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   padding: 2.5rem 1rem;
-  max-width: 700px;
+  max-width: 800px;
 }
 
 header h1 {
@@ -47,8 +47,7 @@ form {
 }
 
 form > * {
-  display: block;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem;
 }
 
 .bookContainer {
@@ -92,4 +91,23 @@ form > * {
 
 li {
   list-style-type: none;
+}
+
+.signupForm {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.App-header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  align-content: space-around;
+}
+
+.Header-links {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
